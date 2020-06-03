@@ -13,7 +13,7 @@ public class Database {
         final String url = "jdbc:mysql://"+ MySQLFile.getDatabaseInfo().get("mysql-server").toString() +":"+MySQLFile.getDatabaseInfo().get("mysql-port").
                 toString()+"/" + MySQLFile.getDatabaseInfo().get("mysql-database").toString();
         final String username = MySQLFile.getDatabaseInfo().get("mysql-user").toString();
-        final String password = "";//MySQLFile.getDatabaseInfo().get("mysql-password").toString();
+        final String password = MySQLFile.getDatabaseInfo().get("mysql-password").toString();
         Connection connection = DriverManager.getConnection(url + "?allowMultiQueries=true", username, password);
         return connection;
     }
