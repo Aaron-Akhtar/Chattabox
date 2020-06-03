@@ -26,7 +26,6 @@ public class MySQLFile implements ChattaboxFile {
                         writer.println("mysql-port=3306");
                         writer.println("mysql-database=chattabox");
                         writer.println("mysql-user=root");
-                        writer.println("# if your server password is empty then put the password value as \"empty\"");
                         writer.println("mysql-password=root");
                     }
                 }else{
