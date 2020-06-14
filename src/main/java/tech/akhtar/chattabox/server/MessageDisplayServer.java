@@ -16,6 +16,12 @@ public class MessageDisplayServer extends Thread{
         this.port = port;
     }
 
+    /***
+     * This is the display server, it waits for incoming connections then starts a specific thread
+     * to handle the connection, if the target is a localhost connection it will start a thread
+     * that handles the message line connection (refer to tech.akhtar.chattabox.Socks.java & tech.akhtar.chattabox.threads.EnsureMessageLineThread.java),
+     * if it is a non-local connection it will continue as a normal client.
+     */
     @Override
     public void run(){
         try{

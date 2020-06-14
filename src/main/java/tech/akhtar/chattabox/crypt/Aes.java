@@ -13,6 +13,11 @@ public class Aes {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
+    /***
+     * Set the secret encryption key that will be used to encrypt the given string.
+     *
+     * @param myKey The key you wish to set as the secret key
+     */
     private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
@@ -28,6 +33,15 @@ public class Aes {
         }
     }
 
+    /***
+     * Encrypt a String using AES.
+     *
+     * @param strToEncrypt The target String to encrypt
+     * @param secret The secret key you wish to encrypt
+     *               the String with, this secret key
+     *               will be used to decrypt the String
+     * @return The encrypted String
+     */
     public static String encrypt(String strToEncrypt, String secret) {
         try {
             setKey(secret);
@@ -40,6 +54,13 @@ public class Aes {
         return null;
     }
 
+    /***
+     * Decrypt the AES Encrypted String.
+     *
+     * @param strToDecrypt The target String to decrypt
+     * @param secret The secret key that was used to encrypt this String
+     * @return The decrypted String
+     */
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             setKey(secret);

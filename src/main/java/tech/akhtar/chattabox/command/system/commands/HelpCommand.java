@@ -26,13 +26,27 @@ public class HelpCommand implements ChattaboxCommand {
         return Role.NORMAL;
     }
 
+    /***
+     * This method will fetch all commands from the commands package
+     * (tech.akhtar.chattabox.command.system.commands) and print out
+     * each one alongside there command description
+     * (tech.akhtar.chattabox.command.system.ChattaboxCommand.java),
+     * it will also only show moderator / administrator commands to moderators
+     * or administrators.
+     *
+     * @param args If the executor inputs additional arguments they will be specified in
+     *             this String Array
+     * @param executorUserClient The executors UserClient Object
+     * @param writer The output stream writer that is used to print output to the client
+     * @param mrsClientHandler The Receiver Client Handler Object for the executor
+     */
     @Override
     public void doAction(String[] args, UserClient executorUserClient, BufferedWriter writer, MRSClientHandler mrsClientHandler) {
         try{
             writer.write("\r\n");
             for (Class<? extends ChattaboxCommand> commandClass : Chattabox.COMMANDS) {
                 ChattaboxCommand chattaboxCommand = commandClass.newInstance();
-                if (!Boolean.parseBoolean(MySQLFile.getDatabaseInfo().get("enabled").toString())){
+                if (!Chattabox.isMySQLEnabled){
                     if (chattaboxCommand.getRequiredRole().equals(Role.NORMAL)) {
                         writer.write(chattaboxCommand.getCommand() + " -> " + chattaboxCommand.getCommandDescription());
                         writer.write("\r\n");

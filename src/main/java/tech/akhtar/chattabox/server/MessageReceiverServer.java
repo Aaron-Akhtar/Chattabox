@@ -15,6 +15,11 @@ public class MessageReceiverServer implements Runnable{
         this.port = port;
     }
 
+    /***
+     * This is the Message Receiver Server, it allows users to connect and write messages
+     * to the Display Server or use commands that allow customization and more, this
+     * method starts the Client Handler for the Receiving Server.
+     */
     @Override
     public void run() {
         try{

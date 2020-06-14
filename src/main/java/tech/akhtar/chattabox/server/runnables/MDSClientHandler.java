@@ -16,8 +16,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MDSClientHandler implements Runnable{
+    /**Connected Clients (Only connected clients to the Display Server)*/
     public static Set<Socket> connectedClients = new HashSet<>();
 
+    /***
+     * Checks if there is already someone connected to the display server with
+     * a specified address.
+     *
+     * @param address Target address to look for
+     * @return boolean value based on if there is another client with the target address connected
+     */
     private static boolean isDup(InetAddress address){
         for (Socket socket : connectedClients){
             if (!Socks.isSocketConnected(socket)) return false;
@@ -32,6 +40,9 @@ public class MDSClientHandler implements Runnable{
         this.socket = socket;
     }
 
+    /***
+     * Handles client connections for the Display Server.
+     */
     @Override
     public void run() {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {

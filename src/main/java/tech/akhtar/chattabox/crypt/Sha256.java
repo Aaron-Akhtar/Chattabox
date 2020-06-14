@@ -7,6 +7,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class Sha256 {
 
+    /***
+     * Hash a String using SHA-256.
+     *
+     * @param input Target String to hash
+     * @return The hashed String
+     */
     public static String getSha(String input) throws NoSuchAlgorithmException {
         // Static getInstance method is called with hashing SHA
         MessageDigest md = MessageDigest.getInstance("SHA-256");

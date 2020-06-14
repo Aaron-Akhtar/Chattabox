@@ -14,6 +14,12 @@ import java.util.Map;
 
 public class PropertiesFile implements ChattaboxFile {
 
+    /***
+     * Get the Properties File Object, if the file does not yet exist then one will be created.
+     * The Properties File is used to customise Chattabox.
+     *
+     * @return File Object, returns null if a exception is thrown
+     */
     @Override
     public File getFile() {
         File file = new File(ChattaboxFile.getChattaboxHomeDirectory() + "/default-settings.txt");
@@ -36,19 +42,6 @@ public class PropertiesFile implements ChattaboxFile {
             }
         }
         return file;
-    }
-
-    public static Map<String, Object> getProps(){
-        Map<String, Object> properties = new HashMap<>();
-        try{
-            List<String> x = Files.readAllLines(Paths.get(new PropertiesFile().getFile().getAbsolutePath()));
-            for (String l : x){
-                if (!properties.containsKey(l.split("=")[0])) properties.put(l.split("=")[0], l.split("=")[1]);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return properties;
     }
 
 }

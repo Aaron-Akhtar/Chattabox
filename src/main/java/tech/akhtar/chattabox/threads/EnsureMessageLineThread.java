@@ -14,6 +14,11 @@ import static tech.akhtar.chattabox.Socks.writer;
 
 public class EnsureMessageLineThread extends Thread {
 
+    /***
+     * The message line (refer to tech.akhtar.chattabox.Socks.java) needs to be connected in order to broadcast messages,
+     * this thread ensures that the message line is always connected, and if it is not connected it
+     * will continue to try until it is connected.
+     */
     @Override
     public void run() {
         System.out.println(Chattabox.PREFIX + "EML Started...");

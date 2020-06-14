@@ -26,6 +26,15 @@ public class ExitCommand implements ChattaboxCommand {
         return Role.NORMAL;
     }
 
+    /***
+     * This method will stop the executors connection and handler safely.
+     *
+     * @param args If the executor inputs additional arguments they will be specified in
+     *             this String Array
+     * @param executorUserClient The executors UserClient Object
+     * @param writer The output stream writer that is used to print output to the client
+     * @param mrsClientHandler The Receiver Client Handler Object for the executor
+     */
     @Override
     public void doAction(String[] args, UserClient executorUserClient, BufferedWriter writer, MRSClientHandler mrsClientHandler) {
         mrsClientHandler.shouldClose = true;
