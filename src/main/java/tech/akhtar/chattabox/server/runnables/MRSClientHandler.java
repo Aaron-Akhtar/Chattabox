@@ -4,6 +4,7 @@ import tech.akhtar.chattabox.Chattabox;
 import tech.akhtar.chattabox.Socks;
 import tech.akhtar.chattabox.command.system.ChattaboxCommand;
 import tech.akhtar.chattabox.crypt.Aes;
+import tech.akhtar.chattabox.file.manager.ChattaboxFile;
 import tech.akhtar.chattabox.file.manager.files.MOTDFile;
 import tech.akhtar.chattabox.file.manager.files.MySQLFile;
 import tech.akhtar.chattabox.file.manager.files.PropertiesFile;
@@ -13,15 +14,23 @@ import tech.akhtar.chattabox.utils.WindowUtils;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Map;
 
 public class MRSClientHandler implements Runnable{
+    /**User related variables // Socket related**/
     public String prefix = "";
     public boolean shouldClose = false;
     public boolean kicked = false;
     public String kick_reason = "";
 
+    /***
+     * Sets the users prefix - if user is a staff member they will be given the appropriate prefix.
+     *
+     * @param userClient Target User
+     * @return The target users prefix
+     */
     public static String getPrefix(UserClient userClient){
-        if (Boolean.parseBoolean(MySQLFile.getDatabaseInfo().get("enabled").toString())) {
+        if (Chattabox.isMySQLEnabled) {
             if (userClient.isAdministrator()) {
                 return Chattabox.ADMIN_PREFIX + userClient.getUserClientSettings().getUsernameColour().get() + userClient.getUsername() + Colour.WHITE.get() + ": " + Colour.RESET.get();
             } else if (userClient.isModerator()) {
@@ -37,6 +46,9 @@ public class MRSClientHandler implements Runnable{
         this.socket = socket;
     }
 
+    /***
+     * Handles the clients connection appropriately.
+     */
     @Override
     public void run() {
         try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -63,7 +75,7 @@ public class MRSClientHandler implements Runnable{
                 Thread.sleep(3000);
                 return;
             }
-            if (Boolean.parseBoolean(MySQLFile.getDatabaseInfo().get("enabled").toString())) {
+            if (Chattabox.isMySQLEnabled) {
                 if (userClient.isAdministrator() || userClient.isModerator()) {
                     writer.write("This username is reserved for a staff member... \r\n");
                     writer.write("Please enter your 2FA code to be allowed access: " + Colour.BLACK.get());
@@ -101,11 +113,20 @@ public class MRSClientHandler implements Runnable{
         }catch (Exception e){
             if(!e.getMessage().toLowerCase().contains("connection abort") && !e.getMessage().toLowerCase().contains("socket closed")){
                 e.printStackTrace();
+            }else{
+                System.out.println(Chattabox.PREFIX + Colour.CYAN.get() + userClient.getUsername() + " has left");
             }
         }
         Chattabox.userClientThreadMap.remove(userClient);
     }
 
+    /***
+     * Parses and reads users input string to see if it matches a command or is just normal
+     * text, if its a command it will execute the appropriate method.
+     *
+     * @param string Target Input Text
+     * @param writer BufferedWriter Object to write output to target
+     */
     private void check(String string, BufferedWriter writer) {
         String[] args = null;
         try {

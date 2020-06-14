@@ -13,6 +13,13 @@ import java.util.Map;
 
 public class MySQLFile implements ChattaboxFile {
 
+    /***
+     * Get the MySQL File Object, if the file does not yet exist then one will be created.
+     * The MySQL File is used to setup MySQL connectivity to enable features such as
+     * the moderation feature.
+     *
+     * @return File Object, returns null if a exception is thrown
+     */
     @Override
     public File getFile() {
         File file = new File(ChattaboxFile.getChattaboxHomeDirectory() + "/mysql.txt");
@@ -37,22 +44,6 @@ public class MySQLFile implements ChattaboxFile {
             }
         }
         return file;
-    }
-
-    public static Map<String, Object> getDatabaseInfo(){
-        Map<String, Object> dbInfo = new HashMap<>();
-        try{
-            List<String> x = Files.readAllLines(Paths.get(new MySQLFile().getFile().getAbsolutePath()));
-            for (String l : x){
-                if (l.charAt(0) == '#') continue;
-                if (!dbInfo.containsKey(l.split("=")[0])){
-                    dbInfo.put(l.split("=")[0], (l.split("=")[1].equalsIgnoreCase("empty")) ? "" : l.split("=")[1]);
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return dbInfo;
     }
 
 
