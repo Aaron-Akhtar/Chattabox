@@ -17,7 +17,7 @@ Step 2: Download the Chattabox Runnable Jar from the [releases section](https://
 
 Step 3: Locate and enter the directory your runnable jar is located at via your command prompt / terminal and type the following to start Chattabox: `java -jar Chattabox.jar`
 
-## How to connect to your IRC Server
+## How to connect to your Server
 
 Step 1: Install PuTTY over at https://www.putty.org/.
 
