@@ -1,5 +1,5 @@
 # Chattabox
-Chattabox is a IRC Server you can run on your Windows or Linux machines (Linux is highly recommended for the best experience), it utilises the Telnet Protocol.
+Chattabox is a Messaging Server you can run on your Windows or Linux machines (Linux is highly recommended for the best experience), it utilises the Telnet Protocol.
 
 # How to run on Windows
 Step 1: Install Java by heading over to http://java.com/ and installing the latest version.
@@ -26,7 +26,7 @@ Step 2: Select the 'Telnet' Connection Type.
 Step 3: Enter your server ip address and the port for the chattabox receiver (check 'chattabox/default-settings.txt' for this port), repeat this with the display port.
 
 ## Features
-* Encrypted IRC Server
+* Encrypted Server
 * Configurable
 * Moderation Feature
 * MySQL Support
