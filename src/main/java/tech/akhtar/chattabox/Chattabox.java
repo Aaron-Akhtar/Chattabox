@@ -31,7 +31,7 @@ public class Chattabox {
     public static final String PAYLOAD_PASS = propertiesMap.get("payload").toString();
     public static List<Thread> THREADS = new ArrayList<>();
     public static final int DISPLAY_PORT = Integer.parseInt(propertiesMap.get("display-port").toString());
-    public static final int RECEIVER_PORT = Integer.parseInt(propertiesMap.get("receiver-port").toString());
+    private static final int RECEIVER_PORT = Integer.parseInt(propertiesMap.get("receiver-port").toString());
     public static Thread receiver;
     public static Thread display;
     public static boolean isMySQLEnabled = Boolean.parseBoolean(mysqlMap.get("enabled").toString());
