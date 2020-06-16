@@ -31,3 +31,6 @@ Step 3: Enter your server ip address and the port for the chattabox receiver (ch
 * Moderation Feature
 * MySQL Support
 * Interactive Client Side Features
+
+## Support
+Discord Server: http://discord.akhtar.tech
